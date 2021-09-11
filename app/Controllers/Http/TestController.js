@@ -7,6 +7,11 @@
 /**
  * Resourceful controller for interacting with tests
  */
+const Tests = use('App/Models/Test')
+// import Tests from 'App/Models/Test'
+
+// import Database from '@ioc:Adonis/Lucid/Database'
+
 class TestController {
   /**
    * Show a list of all tests.
@@ -19,7 +24,13 @@ class TestController {
    */
   async index ({ request, response, view }) {
 
-    return 'I am from TestController';
+    // const tests = await Database
+    // .from('tests') // 👈 gives an instance of select query builder
+    // .select('*');
+
+    const tests = await Tests.all();
+
+    return view.render('home', {tsts: tests.toJSON()});
   }
 
   /**
